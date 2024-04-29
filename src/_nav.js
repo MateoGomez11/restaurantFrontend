@@ -15,21 +15,21 @@ const _nav = [
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
   },
   {
-  component: CNavTitle,
-  name: 'Managment'
+    component: CNavTitle,
+    name: 'Management'
   },
   {
     component: CNavGroup,
     name: 'Restaurants',
-    to: '/restaurants',
+    to:'/restaurants',
     icon: <CIcon icon={cilFastfood} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Restaurant',
-        to: '/restaurants/restaurant'
+        to:'/restaurants/restaurant'
       }
-    ] 
+    ]
   },
   {
     component: CNavItem,
@@ -40,4 +40,3 @@ const _nav = [
 ]
 
 export default _nav
-

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Axios from "axios";
 import {
     CForm,
     CCol,
     CFormInput,
     CFormSelect,
-    CFormCheck,
     CButton
 } from '@coreui/react'
 
 const RestaurantForm = () => {
-    
+
+    const {restaurantId} = useParams();
 
     const [restaurantData, setRestaurantData] = useState({
         restaurantName: '',
@@ -28,6 +28,11 @@ const RestaurantForm = () => {
     const [selectedCity, setSelectedCity] = useState('');
 
     useEffect(()=>{
+        const getRestaurants = async () => {
+            const response = await Axios({url: `http://localhost:1337/api/getrestaurant/${restaurantId}`});
+            const restaurant = response.data.data
+            setRestaurantData(restaurant);
+        }   
         const getDepartments = async () => {
             const response = await Axios({url:'http://localhost:1337/api/listdepartments'});
             const lstDepartments = Object.keys(response.data).map(i=> response.data[i]);
@@ -40,6 +45,7 @@ const RestaurantForm = () => {
             setCities(lstCities.flat());
         }
 
+        getRestaurants();
         getDepartments();
 
         if(selectedDepartment !== "")
@@ -123,4 +129,4 @@ const handleCancel = async (event) => {
     )
 }
 
-export default RestaurantForm
+export default RestaurantEditForm
